@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RedstonePlugins.AdminTools.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,6 +21,10 @@ namespace RedstonePlugins.AdminTools.Helpers
         {
             return JsonConvert.DeserializeObject<Dictionary<string, string>>(path);
         }
-        
+
+        public static Config ReadConfiguration(string path)
+        {
+            return JsonConvert.DeserializeObject<Config>(path);
+        }
     }
 }
