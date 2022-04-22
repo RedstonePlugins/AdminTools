@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminTools.cs" />
+    <Compile Include="Commands\ExampleCommand.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\PlayerHelper.cs" />
@@ -84,7 +85,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
