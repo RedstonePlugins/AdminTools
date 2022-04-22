@@ -52,7 +52,7 @@ namespace RedstonePlugins.AdminTools.Helpers
         {
             return string.Format(Translations[key], placeholder);
         }
-        private static Dictionary<string, string> Translations = AdminTools.Traslations;
+        private static Dictionary<string, string> Translations => AdminTools.Translations;
         private static void SendMessage(SteamPlayer target, string message, UnityEngine.Color color, SteamPlayer sender = default)
         {
             ChatManager.serverSendMessage(message, color, sender, target, EChatMode.SAY, null, true);

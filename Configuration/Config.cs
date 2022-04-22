@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,11 @@ namespace RedstonePlugins.AdminTools.Configuration
 
         public JoinLeaveOptions joinleave = new JoinLeaveOptions
         {
-            ipLogging = true,
+            logIp = false,
 
             showMessages = true,
+
+            logCountry = true,
         };
 
         
@@ -31,11 +34,12 @@ namespace RedstonePlugins.AdminTools.Configuration
 
     public class JoinLeaveOptions
     {
-        public bool ipLogging;
+
+        public bool logIp;
 
         public bool showMessages;
 
-        public bool showCountry;
+        public bool logCountry;
 
     }
 }

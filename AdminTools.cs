@@ -15,7 +15,7 @@ namespace RedstonePlugins.AdminTools
     public class AdminTools : RocketPlugin
     {
 
-        public static Dictionary<string, string> Traslations = new Dictionary<string, string>
+        public static Dictionary<string, string> Translations = new Dictionary<string, string>
         {
             /* Example of Translation */
             {
@@ -35,6 +35,9 @@ namespace RedstonePlugins.AdminTools
             },
             {
                 "event_player_join_server_country", "The player {0} has joined from {1}"
+            },
+            {
+                "event_player_leave_server", "The player {0} left the server."
             }
             
         };
