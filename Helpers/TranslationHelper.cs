@@ -29,6 +29,22 @@ namespace RedstonePlugins.AdminTools.Helpers
             SendMessage(PlayerTool.getSteamPlayer(playerId), GetTranslation(translationKey, placeholder), Color.white, null);
 
         }
+        public static void SendMessageTranslation(SteamPlayer steamPlayer, string translationKey, params object[] placeholder)
+        {
+            
+            if (!PlayerHelper.isPlayerOnline(steamPlayer.playerID.steamID))
+            {
+                Logger.LogError(GetTranslation("err_player_isnt_online", steamPlayer.playerID.steamID));
+                return;
+            }
+            if (string.IsNullOrEmpty(translationKey) || string.IsNullOrWhiteSpace(translationKey))
+            {
+                Logger.LogError(GetTranslation("err_translationkey_is_empty"));
+                return;
+            }
+
+            SendMessage(steamPlayer, GetTranslation(translationKey, placeholder), Color.white, null);
+        }
 
 
 
