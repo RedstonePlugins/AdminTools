@@ -8,8 +8,15 @@ namespace RedstonePlugins.AdminTools.Configuration
 {
     public class Config
     {
-        
+        /* Please use a structure to the config.
+         * 
+         * DONT STORE INFO INTO CONFIGURATION
+         * 
+         * 
+         * 
+         * KEEP EVERYTHING IN THEIR CATEGORY.
+         */
 
-        
+
     }
 }

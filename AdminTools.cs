@@ -14,14 +14,18 @@ namespace RedstonePlugins.AdminTools
 
         public static Dictionary<string, string> Traslations = new Dictionary<string, string>
         {
-
-
             /* Example of Translation */
             {
                 "TranslationKey", "TranslationValue"
             },
             {
                 "mycommand_usage", ""
+            },
+            {
+                "err_player_isnt_online", "Error: the player {0} is not online."
+            },
+            {
+                "err_translationkey_is_empty", "Error: the translationkey is empty."
             }
             
         };
