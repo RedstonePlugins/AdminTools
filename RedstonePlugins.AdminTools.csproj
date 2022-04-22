@@ -80,11 +80,11 @@
     <Compile Include="Helpers\PlayerHelper.cs" />
     <Compile Include="Helpers\RaycastHelper.cs" />
     <Compile Include="Helpers\TranslationHelper.cs" />
+    <Compile Include="Managers\EventManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Managers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

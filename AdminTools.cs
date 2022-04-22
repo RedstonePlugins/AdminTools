@@ -1,5 +1,7 @@
 ﻿using RedstonePlugins.AdminTools.Helpers;
+using RedstonePlugins.AdminTools.Managers;
 using Rocket.Core.Plugins;
+using SDG.Unturned;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +32,7 @@ namespace RedstonePlugins.AdminTools
             
         };
 
+        private static EventManager events;
         private string CONFIG_DIR = string.Empty;
         private string TRANSLATION_DIR = string.Empty;
         public static AdminTools Instance;
@@ -45,9 +48,28 @@ namespace RedstonePlugins.AdminTools
             JsonHelper.ReadTranslations(TRANSLATION_DIR);
             
             Instance = this;
+
+
+            /* Subscribe Events 
+             * Please try to use events from the game instead of RocketMod ones.
+             */
+
+            Provider.onEnemyConnected += events.OnEnemyConnected;
+            Provider.onEnemyDisconnected += events.OnEnemyDisconnected;
+            
+
+            
+            
+
         }
         protected override void Unload()
         {
+            /* Unsubscribe Events */
+
+            Provider.onEnemyConnected -= events.OnEnemyConnected;
+
+            Provider.onEnemyDisconnected -= events.OnEnemyDisconnected;
+
             Instance = null;
         }
     }
