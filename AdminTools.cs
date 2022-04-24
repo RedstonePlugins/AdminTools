@@ -38,6 +38,9 @@ namespace RedstonePlugins.AdminTools
             },
             {
                 "event_player_leave_server", "The player {0} left the server."
+            },
+            {
+                "command_break_success", "The object you were looking has been removed successfully"
             }
             
         };
@@ -49,10 +52,31 @@ namespace RedstonePlugins.AdminTools
         
         protected override void Load()
         {
-            /* Load Config Dir */
 
-            CONFIG_DIR = $@"{this.Directory}Config.json";
-            TRANSLATION_DIR = $@"{this.Directory}Translate.json";
+
+
+            /* PD: IDK TO GET RID OF THIS TRANSLATIONS FILE  DONT HATE ME WITH THAT */
+            if (File.Exists($"{this.Directory}{Path.DirectorySeparatorChar}AdminTools.en.translation.xml"))
+                File.Delete($"{this.Directory}{Path.DirectorySeparatorChar}AdminTools.en.translation.xml");
+
+            
+            
+            /* Load Config Dir */
+            CONFIG_DIR = $@"{this.Directory}{Path.DirectorySeparatorChar}Config.json";
+            TRANSLATION_DIR = $@"{this.Directory}{Path.DirectorySeparatorChar}Translate.json";
+
+            if(!File.Exists(CONFIG_DIR))
+            {
+                JsonHelper.WriteConfiguration(CONFIG_DIR, new Config());
+            }
+
+            if (!File.Exists(TRANSLATION_DIR))
+            {
+                JsonHelper.WriteTranslations(TRANSLATION_DIR, Translations);
+            }
+
+
+
             
             /* Load Translations from JSON file */
             JsonHelper.ReadTranslations(TRANSLATION_DIR);
@@ -65,28 +89,30 @@ namespace RedstonePlugins.AdminTools
 
             Instance = this;
 
+            Rocket.Core.Logging.Logger.Log("Test");
 
             /* Subscribe Events 
              * Please try to use events from the game instead of RocketMod ones.
              */
-
+            events = new EventManager();
             Provider.onEnemyConnected += events.OnEnemyConnected;
             Provider.onEnemyDisconnected += events.OnEnemyDisconnected;
             
 
-            
+            Rocket.Core.Logging.Logger.Log("Test2");
             
 
         }
         protected override void Unload()
         {
+            Instance = null;
             /* Unsubscribe Events */
 
             Provider.onEnemyConnected -= events.OnEnemyConnected;
 
             Provider.onEnemyDisconnected -= events.OnEnemyDisconnected;
 
-            Instance = null;
+            
         }
     }
 }
