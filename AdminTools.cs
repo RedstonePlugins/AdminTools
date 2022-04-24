@@ -89,7 +89,7 @@ namespace RedstonePlugins.AdminTools
 
             Instance = this;
 
-            Rocket.Core.Logging.Logger.Log("Test");
+
 
             /* Subscribe Events 
              * Please try to use events from the game instead of RocketMod ones.
@@ -99,7 +99,7 @@ namespace RedstonePlugins.AdminTools
             Provider.onEnemyDisconnected += events.OnEnemyDisconnected;
             
 
-            Rocket.Core.Logging.Logger.Log("Test2");
+
             
 
         }
