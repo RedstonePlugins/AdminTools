@@ -19,12 +19,22 @@ namespace RedstonePlugins.AdminTools.Helpers
 
         public static Dictionary<string,string> ReadTranslations(string path)
         {
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(path);
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(path));
+        }
+
+        public static void WriteTranslations(string path, Dictionary<string,string> Translations)
+        {
+            File.WriteAllText(path, JsonConvert.SerializeObject(Translations, Formatting.Indented));
+        }
+
+        public static void WriteConfiguration(string path, Config config)
+        {
+            File.WriteAllText(path, JsonConvert.SerializeObject(config, Formatting.Indented));
         }
 
         public static Config ReadConfiguration(string path)
         {
-            return JsonConvert.DeserializeObject<Config>(path);
+            return JsonConvert.DeserializeObject<Config>(File.ReadAllText(path));
         }
     }
 }
