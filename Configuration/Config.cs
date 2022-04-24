@@ -18,28 +18,27 @@ namespace RedstonePlugins.AdminTools.Configuration
          * KEEP EVERYTHING IN THEIR CATEGORY.
          */
 
-        public JoinLeaveOptions joinleave = new JoinLeaveOptions
-        {
-            logIp = false,
-
-            showMessages = true,
-
-            logCountry = true,
-        };
+        public Modules Modules = new Modules();
 
         
 
 
     }
 
+
+    public class Modules
+    {
+        public JoinLeaveOptions JoinLeave = new JoinLeaveOptions();
+    }
+
     public class JoinLeaveOptions
     {
 
-        public bool logIp;
+        public bool logIp = false;
 
-        public bool showMessages;
+        public bool showMessages = true;
 
-        public bool logCountry;
+        public bool logCountry = true;
 
     }
 }
