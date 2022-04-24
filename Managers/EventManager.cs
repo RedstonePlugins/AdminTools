@@ -19,7 +19,7 @@ namespace RedstonePlugins.AdminTools.Managers
         public void OnEnemyConnected(SteamPlayer player)
         {
             #region JoinLeave
-            if (Configuration.joinleave.showMessages)
+            if (Configuration.Modules.JoinLeave.showMessages)
             {
                 TranslationHelper.SendMessageTranslation(player, "event_player_join_server", PlayerHelper.getPlayerName(player));
                 Logger.Log(string.Format(Translations["event_player_join_server"],PlayerHelper.getPlayerName(player)));
@@ -31,7 +31,7 @@ namespace RedstonePlugins.AdminTools.Managers
         public void OnEnemyDisconnected(SteamPlayer player)
         {
             #region JoinLeave
-            if(Configuration.joinleave.showMessages)
+            if(Configuration.Modules.JoinLeave.showMessages)
             {
                 TranslationHelper.SendMessageTranslation(player, "event_player_leave_server", PlayerHelper.getPlayerName(player));
                 Logger.Log(string.Format(Translations["event_player_leave_server"], PlayerHelper.getPlayerName(player)));
