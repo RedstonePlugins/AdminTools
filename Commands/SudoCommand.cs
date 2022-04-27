@@ -27,8 +27,6 @@ namespace RedstonePlugins.AdminTools.Commands
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
-            
-
             var playerCaller = (UnturnedPlayer)caller;
 
             if (!PlayerHelper.isPlayerOnline(playerCaller.CSteamID))
@@ -50,21 +48,8 @@ namespace RedstonePlugins.AdminTools.Commands
                 return;
             }
 
-
-
-            
             ChatManager.instance.askChat(playerCaller.CSteamID, (byte)EChatMode.GLOBAL, string.Join(" ", command.Skip(1).ToArray()));
             TranslationHelper.SendMessageTranslation(playerCaller.CSteamID, "command_sudo_success", playerRemote.DisplayName, string.Join(" ", command.Skip(1).ToArray()));
-
-
-
-
-
-
-
-
-
-
         }
     }
 }
