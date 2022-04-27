@@ -1,4 +1,5 @@
-﻿using SDG.Unturned;
+﻿using Rocket.Unturned.Player;
+using SDG.Unturned;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,6 @@ namespace RedstonePlugins.AdminTools.Helpers
 
             return BarricadeManager.FindBarricadeByRootTransform(transform).interactable.transform.GetComponent<Interactable2SalvageBarricade>();
         }
-
-
 
 
         private static RaycastInfo TraceRay(Player player, float distance, int masks)

@@ -77,6 +77,8 @@
     <Compile Include="AdminTools.cs" />
     <Compile Include="Commands\BreakCommand.cs" />
     <Compile Include="Commands\ExampleCommand.cs" />
+    <Compile Include="Commands\GravityCommand.cs" />
+    <Compile Include="Commands\SpeedCommand.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\PlayerHelper.cs" />
