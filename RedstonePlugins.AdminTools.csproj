@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="AdminTools.cs" />
     <Compile Include="Commands\BreakCommand.cs" />
+    <Compile Include="Commands\SudoCommand.cs" />
     <Compile Include="Commands\ExampleCommand.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />

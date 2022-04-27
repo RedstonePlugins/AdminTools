@@ -44,6 +44,12 @@ namespace RedstonePlugins.AdminTools
             },
             {
                 "event_onplayerchatted_spamlimit_rate", "<color=yellow>Antispam is active; wait to chat again.</color>"
+            },
+            {
+                "command_sudo_success", "{0} ran {1} successfully."
+            },
+            {
+                "command_sudo_success", ""
             }
             
         };
