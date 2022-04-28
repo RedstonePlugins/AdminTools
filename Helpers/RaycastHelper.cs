@@ -20,6 +20,12 @@ namespace RedstonePlugins.AdminTools.Helpers
 
 
 
+        public static Player getPlayerFromLook(Player player){
+            var transform = TraceRay(player, 8f, RayMasks.PLAYER).transform;
+            if (transform == null) return null;
+
+            return transform.GetComponent<Player>();
+        }
 
         private static RaycastInfo TraceRay(Player player, float distance, int masks)
         {
