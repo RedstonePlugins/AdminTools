@@ -3,6 +3,7 @@ using RedstonePlugins.AdminTools.Helpers;
 using RedstonePlugins.AdminTools.Managers;
 using Rocket.Core.Plugins;
 using SDG.Unturned;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +15,6 @@ namespace RedstonePlugins.AdminTools
 {
     public class AdminTools : RocketPlugin
     {
-
         public static Dictionary<string, string> Translations = new Dictionary<string, string>
         {
             /* Example of Translation */
@@ -40,18 +40,25 @@ namespace RedstonePlugins.AdminTools
                 "event_player_leave_server", "The player {0} left the server."
             },
             {
+                "ProperUsage", "{0}"
+            },
+            {
                 "command_break_success", "The object you were looking has been removed successfully"
+            },
+            {
+                "command_gravity_speed_success", "You have successfully set your {0} to: {1}"
+            },
+            {
+                "command_gravity_speed_value_notnumber", "Error: {0} is not a Number"
             },
             {
                 "event_onplayerchatted_spamlimit_rate", "<color=yellow>Antispam is active; wait to chat again.</color>"
             },
             {
                 "command_sudo_success", "{0} ran {1} successfully."
-            },
-            {
-                "command_sudo_success", ""
             }
-            
+
+
         };
         public static Config Configuration;
         private static EventManager events;
