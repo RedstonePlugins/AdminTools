@@ -47,9 +47,6 @@ namespace RedstonePlugins.AdminTools
             },
             {
                 "command_sudo_success", "{0} ran {1} successfully."
-            },
-            {
-                "command_sudo_success", ""
             }
             
         };
