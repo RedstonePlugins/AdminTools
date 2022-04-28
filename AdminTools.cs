@@ -50,6 +50,12 @@ namespace RedstonePlugins.AdminTools
             },
             {
                 "command_gravity_speed_value_notnumber", "Error: {0} is not a Number"
+            },
+            {
+                "event_onplayerchatted_spamlimit_rate", "<color=yellow>Antispam is active; wait to chat again.</color>"
+            },
+            {
+                "command_sudo_success", "{0} ran {1} successfully."
             }
 
 
@@ -107,6 +113,8 @@ namespace RedstonePlugins.AdminTools
             events = new EventManager();
             Provider.onEnemyConnected += events.OnEnemyConnected;
             Provider.onEnemyDisconnected += events.OnEnemyDisconnected;
+
+            ChatManager.onChatted += events.onPlayerChatted;
             
 
 

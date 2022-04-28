@@ -29,16 +29,23 @@ namespace RedstonePlugins.AdminTools.Configuration
     public class Modules
     {
         public JoinLeaveOptions JoinLeave = new JoinLeaveOptions();
+        public AntiSpam AntiSpam = new AntiSpam();
     }
 
     public class JoinLeaveOptions
     {
 
-        public bool logIp = false;
+        public bool LogIp = false;
 
-        public bool showMessages = true;
+        public bool ShowMessages = true;
 
-        public bool logCountry = true;
+        public bool LogCountry = true;
 
+    }
+
+    public class AntiSpam
+    {
+        public bool Enable = true;
+        public int Interval = 3;
     }
 }
