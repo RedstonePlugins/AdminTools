@@ -17,6 +17,10 @@ namespace RedstonePlugins.AdminTools.Helpers
         {
             return Provider.clients.Select(x => x.playerID.steamID).Contains(SteamId);
         }
+        public static bool isPlayerOnline(ulong SteamId)
+        {
+            return Provider.clients.Select(x => x.playerID.steamID.m_SteamID).Contains(SteamId);
+        }
 
         /* Get Player Name */
 
