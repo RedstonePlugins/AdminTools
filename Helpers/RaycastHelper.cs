@@ -12,14 +12,29 @@ namespace RedstonePlugins.AdminTools.Helpers
     {
        public static Interactable2SalvageBarricade getBarricade(Player player)
         {
-            var transform = TraceRay(player, 8f, RayMasks.BARRICADE).transform;
+            var transform = TraceRay(player, 20f, RayMasks.BARRICADE).transform;
             if (transform == null) return null;
 
-            return BarricadeManager.FindBarricadeByRootTransform(transform).interactable.transform.GetComponent<Interactable2SalvageBarricade>();
+            return transform.GetComponent<Interactable2SalvageBarricade>();
         }
 
 
+        public static Interactable2SalvageStructure getStructure(Player player)
+        {
+            var transform = TraceRay(player, 20f, RayMasks.BARRICADE).transform;
+            if(transform == null) return null;
 
+
+            return transform.GetComponent<Interactable2SalvageStructure>();
+        }
+
+        public static InteractableVehicle getVehicle(Player player)
+        {
+            var transform = TraceRay(player, 20f, RayMasks.VEHICLE).transform;
+            if( transform == null) return null;
+
+            return transform.GetComponent<InteractableVehicle>();
+        }
         public static Player getPlayerFromLook(Player player){
             var transform = TraceRay(player, 8f, RayMasks.PLAYER).transform;
             if (transform == null) return null;
@@ -27,6 +42,11 @@ namespace RedstonePlugins.AdminTools.Helpers
             return transform.GetComponent<Player>();
         }
 
+
+        public static RaycastInfo TraceTransform(Player player, float distance, int masks)
+        {
+            return TraceRay(player, distance, masks);
+        }
         private static RaycastInfo TraceRay(Player player, float distance, int masks)
         {
             return DamageTool.raycast(new Ray(player.look.aim.position, player.look.aim.forward), distance, masks);
