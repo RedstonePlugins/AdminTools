@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace RedstonePlugins.AdminTools.Commands
 {
@@ -34,7 +35,15 @@ namespace RedstonePlugins.AdminTools.Commands
             var barricade = RaycastHelper.getBarricade(playerCaller.Player);
 
             if (barricade != null)
-                BarricadeManager.damage(barricade.transform, barricade.hp.hp, 1, false, playerCaller.CSteamID, EDamageOrigin.Unknown);
+                BarricadeManager.damage(barricade.transform, 9999, 1, false, playerCaller.CSteamID, EDamageOrigin.Unknown);
+
+
+                
+            var structure = RaycastHelper.getStructure(playerCaller.Player);
+
+            if (structure != null)
+                StructureManager.damage(structure.transform, Vector3.down, 9999, 1, false, playerCaller.CSteamID, EDamageOrigin.Unknown);
+
 
             TranslationHelper.SendMessageTranslation(playerCaller.CSteamID, "command_break_success");
                 
