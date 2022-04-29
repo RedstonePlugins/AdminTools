@@ -31,7 +31,7 @@ namespace RedstonePlugins.AdminTools
                 "err_translationkey_is_empty", "Error: the translationkey is empty."
             },
             {
-                "event_player_join_server", "The player {0} has joined the server."
+                "event_player_join_server", "<color=#808080>{0} has joined the server</color>"
             },
             {
                 "event_player_join_server_country", "The player {0} has joined from {1}"
@@ -47,6 +47,12 @@ namespace RedstonePlugins.AdminTools
             },
             {
                 "command_sudo_success", "{0} ran {1} successfully."
+            },
+            {
+                "command_whois_success", "<color=yellow>ID: {0}</color> <color=#00FFFF>[{1}]</color> <color=red>isOnline: {2}</color> "
+            },
+            {
+                "command_whois_error", "<color=red>You are not looking to any object</color>"
             }
             
         };
