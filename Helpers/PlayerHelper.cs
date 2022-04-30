@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RedstonePlugins.AdminTools.Components;
 
 namespace RedstonePlugins.AdminTools.Helpers
 {
@@ -52,9 +53,17 @@ namespace RedstonePlugins.AdminTools.Helpers
         }
 
 
+        /* Flying */
 
+        public static bool isFlying(Player player)
+        {
+            return player.GetComponent<AdminToolsPlayerComponent>().isFlying;
+        }
 
-        
+        public static void SetFlying(Player player, bool value)
+        {
+            player.GetComponent<AdminToolsPlayerComponent>().isFlying = value;
+        }
 
 
     }

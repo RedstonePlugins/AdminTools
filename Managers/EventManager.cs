@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Rocket.Unturned.Player;
 using Rocket.API;
 using Steamworks;
+using RedstonePlugins.AdminTools.Components;
 
 namespace RedstonePlugins.AdminTools.Managers
 {
@@ -25,7 +26,7 @@ namespace RedstonePlugins.AdminTools.Managers
             if (Configuration.Modules.JoinLeave.ShowMessages)
             {
                 TranslationHelper.SendMessageTranslation(player, "event_player_join_server", PlayerHelper.getPlayerName(player));
-                Logger.Log(string.Format(Translations["event_player_join_server"],PlayerHelper.getPlayerName(player)));
+                Logger.Log(string.Format(Translations["event_player_join_server"], PlayerHelper.getPlayerName(player)));
 
             }
             #endregion
@@ -41,7 +42,7 @@ namespace RedstonePlugins.AdminTools.Managers
 
             }
 
-            #endregion
+                #endregion
         }
 
         public void onPlayerChatted(SteamPlayer player, EChatMode mode, ref UnityEngine.Color chatted, ref bool isRich, string text, ref bool isVisible)
@@ -65,7 +66,18 @@ namespace RedstonePlugins.AdminTools.Managers
                 lastChatted[playerID] = DateTime.Now;
             }
 
-            #endregion
+                #endregion
+        }
+
+        public void onKeyDown(Player player, uint simulation, byte key, bool state)
+        {
+            if (PlayerHelper.isFlying(player))
+                if (player.input.keys[0])
+                    player.movement.sendPluginGravityMultiplier(-1f);
+                else if (player.input.keys[5])
+                    player.movement.sendPluginGravityMultiplier(1f);
+                else
+                    player.movement.sendPluginGravityMultiplier(0f);
         }
     }
 }

@@ -19,7 +19,26 @@ namespace RedstonePlugins.AdminTools.Helpers
             return BarricadeManager.FindBarricadeByRootTransform(transform).interactable.transform.GetComponent<Interactable2SalvageBarricade>();
         }
 
+        public static InteractableDoor getDoor(Player player)
+        {
+            var transform = TraceRay(player, 8f, RayMasks.BARRICADE).transform;
+            if (transform == null) return null;
 
+            return BarricadeManager.FindBarricadeByRootTransform(transform).interactable.transform.GetComponent<InteractableDoor>();
+        }
+
+        public static InteractableVehicle getVehicle(Player player)
+        {
+            RaycastInfo info = TraceRay(player, 8f, RayMasks.VEHICLE);
+            if (info.vehicle == null) return null;
+
+            return info.vehicle;
+        }
+
+        public static RaycastInfo GetHitInfo(Player player, float distance = 1000)
+        {
+            return TraceRay(player, distance, RayMasks.BLOCK_COLLISION & ~(1 << 0x15));
+        }
 
         public static Player getPlayerFromLook(Player player){
             var transform = TraceRay(player, 8f, RayMasks.PLAYER).transform;
