@@ -3,12 +3,14 @@ using RedstonePlugins.AdminTools.Helpers;
 using RedstonePlugins.AdminTools.Managers;
 using Rocket.Core.Plugins;
 using SDG.Unturned;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace RedstonePlugins.AdminTools
 {
@@ -53,6 +55,33 @@ namespace RedstonePlugins.AdminTools
             },
             {
                 "command_whois_error", "<color=red>You are not looking to any object</color>"
+            },
+            {
+                "command_back_success","Teleported back to your death position."
+            },
+            {
+                "command_back_error", "<color=red>error: could not determine your death position</color>"
+            },
+            {
+                "command_boom_success_other", "Boom sent successfully to {0}"
+            },
+            {
+                "command_boom_success_all", "Sent boom to all players."
+            },
+            {
+                "command_boom_error", "Could not determine the boom direction"
+            },
+            {
+                "command_boom_success", "Boom sent to your eye's direction"
+            },
+            {
+                "command_kill_success", "Killed {0}"
+            },
+            {
+                "command_kill_error", "Couldn't find the player {0}"
+            },
+            {
+                "command_kill_success_all", "Killed 'everyone'"
             }
             
         };
@@ -61,6 +90,9 @@ namespace RedstonePlugins.AdminTools
         private string CONFIG_DIR = string.Empty;
         private string TRANSLATION_DIR = string.Empty;
         public static AdminTools Instance;
+
+        public static Dictionary<CSteamID, Vector3> PlayerDeathLocation = new Dictionary<CSteamID, Vector3>();
+
         
         protected override void Load()
         {
@@ -109,6 +141,8 @@ namespace RedstonePlugins.AdminTools
             events = new EventManager();
             Provider.onEnemyConnected += events.OnEnemyConnected;
             Provider.onEnemyDisconnected += events.OnEnemyDisconnected;
+            PlayerLife.onPlayerDied += events.OnPlayerDied;
+
 
             ChatManager.onChatted += events.onPlayerChatted;
             
@@ -120,13 +154,22 @@ namespace RedstonePlugins.AdminTools
         protected override void Unload()
         {
             Instance = null;
+
+            Configuration = null;
+
+            Translations = null;
+
             /* Unsubscribe Events */
 
             Provider.onEnemyConnected -= events.OnEnemyConnected;
 
             Provider.onEnemyDisconnected -= events.OnEnemyDisconnected;
+            PlayerLife.onPlayerDied -= events.OnPlayerDied;
 
-            
+
+            ChatManager.onChatted -= events.onPlayerChatted;
+
+
         }
     }
 }
