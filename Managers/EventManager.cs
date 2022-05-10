@@ -67,5 +67,20 @@ namespace RedstonePlugins.AdminTools.Managers
 
             #endregion
         }
+
+        public void OnPlayerDied(PlayerLife sender, EDeathCause cause, ELimb limb, CSteamID instigator)
+        {
+            if (sender.player == null) return;
+
+            var playerId = sender.player.channel.owner.playerID.steamID;
+
+
+            #region BackCommand
+            if (!AdminTools.PlayerDeathLocation.ContainsKey(playerId))
+                AdminTools.PlayerDeathLocation.Add(playerId, sender.transform.position);
+            else 
+                AdminTools.PlayerDeathLocation[playerId] = sender.transform.position;
+            #endregion
+        }
     }
 }
