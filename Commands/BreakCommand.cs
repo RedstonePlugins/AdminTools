@@ -34,15 +34,17 @@ namespace RedstonePlugins.AdminTools.Commands
 
             var barricade = RaycastHelper.getBarricade(playerCaller.Player);
 
-            if (barricade != null)
+            if (barricade.transform != null)
                 BarricadeManager.damage(barricade.transform, 9999, 1, false, playerCaller.CSteamID, EDamageOrigin.Unknown);
 
 
                 
             var structure = RaycastHelper.getStructure(playerCaller.Player);
 
-            if (structure != null)
+            if (structure.transform != null)
                 StructureManager.damage(structure.transform, Vector3.down, 9999, 1, false, playerCaller.CSteamID, EDamageOrigin.Unknown);
+
+
 
 
             TranslationHelper.SendMessageTranslation(playerCaller.CSteamID, "command_break_success");
