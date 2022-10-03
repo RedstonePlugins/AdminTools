@@ -3,6 +3,7 @@ using Rocket.API;
 using Rocket.Unturned.Player;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,21 +25,23 @@ namespace RedstonePlugins.AdminTools.Commands
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
-            UnturnedPlayer player = (UnturnedPlayer)caller;
+            var player = (UnturnedPlayer)caller;
             if (command.Length < 1)
             {
                 TranslationHelper.SendMessageTranslation(player.CSteamID, "ProperUsage", "/Gravity <Number>");
                 return;
             }
-            var Value = command[0];
-            if(float.TryParse(Value, out float val))
+            var value = command[0];
+            if (!float.TryParse(value, out float val))
             {
-                player.Player.movement.sendPluginJumpMultiplier(val);
-                TranslationHelper.SendMessageTranslation(player.CSteamID, "command_gravity_speed_success", "Gravity", val.ToString());
+                TranslationHelper.SendMessageTranslation(player.CSteamID, "command_gravity_value_notnumber",
+                    val.ToString(CultureInfo.CurrentCulture));
             }
             else
             {
-                TranslationHelper.SendMessageTranslation(player.CSteamID, "command_gravity_value_notnumber", val.ToString());
+                player.Player.movement.sendPluginJumpMultiplier(val);
+                TranslationHelper.SendMessageTranslation(player.CSteamID, "command_gravity_speed_success", "Gravity",
+                    val.ToString(CultureInfo.CurrentCulture));
             }
         }
     }

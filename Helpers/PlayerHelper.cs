@@ -20,35 +20,35 @@ namespace RedstonePlugins.AdminTools.Helpers
 
         /* Get Player Name */
 
-        public static string getPlayerName(CSteamID SteamId)
+        public static string GetPlayerName(CSteamID SteamId)
         {
             return PlayerTool.getPlayer(SteamId).channel.owner.playerID.playerName;
         }
-        public static string getPlayerName(SteamPlayer SteamId)
+        public static string GetPlayerName(SteamPlayer SteamId)
         {
             return SteamId.playerID.playerName;
         }
-        public static string getPlayerName(ulong SteamId)
+        public static string GetPlayerName(ulong SteamId)
         {
             PlayerTool.tryGetSteamID(SteamId.ToString(), out CSteamID steamId);
-            return getPlayerName(SteamId);
+            return GetPlayerName(SteamId);
         }
 
-        public static string getPlayerName(string SteamId)
+        public static string GetPlayerName(string SteamId)
         {
             PlayerTool.tryGetSteamID(SteamId, out CSteamID steamId);
-            return getPlayerName(steamId);
+            return GetPlayerName(steamId);
         }
 
 
         /* Holding Item */
-        public static bool isPlayerHoldingItem(UnturnedPlayer player)
+        public static bool IsPlayerHoldingItem(UnturnedPlayer player)
         {
             return player.Player.equipment.isEquipped;
         }
-        public static bool isPlayerHoldingItem(CSteamID SteamId)
+        public static bool IsPlayerHoldingItem(CSteamID SteamId)
         {
-            return isPlayerHoldingItem(UnturnedPlayer.FromCSteamID(SteamId));
+            return IsPlayerHoldingItem(UnturnedPlayer.FromCSteamID(SteamId));
         }
 
 

@@ -15,7 +15,7 @@ namespace RedstonePlugins.AdminTools
 {
     public class AdminTools : RocketPlugin
     {
-        public static Dictionary<string, string> Translations = new Dictionary<string, string>
+        public new static Dictionary<string, string> Translations = new Dictionary<string, string>
         {
             /* Example of Translation */
             {
@@ -61,10 +61,10 @@ namespace RedstonePlugins.AdminTools
 
         };
         public static Config Configuration;
-        private static EventManager events;
-        private string CONFIG_DIR = string.Empty;
-        private string TRANSLATION_DIR = string.Empty;
-        public static AdminTools Instance;
+        private static EventManager _events;
+        private string _configDir = string.Empty;
+        private string _translationDir = string.Empty;
+        private static AdminTools _instance;
         
         protected override void Load()
         {
@@ -78,43 +78,43 @@ namespace RedstonePlugins.AdminTools
             
             
             /* Load Config Dir */
-            CONFIG_DIR = $@"{this.Directory}{Path.DirectorySeparatorChar}Config.json";
-            TRANSLATION_DIR = $@"{this.Directory}{Path.DirectorySeparatorChar}Translate.json";
+            _configDir = $@"{this.Directory}{Path.DirectorySeparatorChar}Config.json";
+            _translationDir = $@"{this.Directory}{Path.DirectorySeparatorChar}Translate.json";
 
-            if(!File.Exists(CONFIG_DIR))
+            if(!File.Exists(_configDir))
             {
-                JsonHelper.WriteConfiguration(CONFIG_DIR, new Config());
+                JsonHelper.WriteConfiguration(_configDir, new Config());
             }
 
-            if (!File.Exists(TRANSLATION_DIR))
+            if (!File.Exists(_translationDir))
             {
-                JsonHelper.WriteTranslations(TRANSLATION_DIR, Translations);
+                JsonHelper.WriteTranslations(_translationDir, Translations);
             }
 
 
 
             
             /* Load Translations from JSON file */
-            JsonHelper.ReadTranslations(TRANSLATION_DIR);
+            JsonHelper.ReadTranslations(_translationDir);
 
 
             /* Load Configuration from JSON file */
 
-            Configuration = JsonHelper.ReadConfiguration(CONFIG_DIR);
+            Configuration = JsonHelper.ReadConfiguration(_configDir);
 
 
-            Instance = this;
+            _instance = this;
 
 
 
             /* Subscribe Events 
              * Please try to use events from the game instead of RocketMod ones.
              */
-            events = new EventManager();
-            Provider.onEnemyConnected += events.OnEnemyConnected;
-            Provider.onEnemyDisconnected += events.OnEnemyDisconnected;
+            _events = new EventManager();
+            Provider.onEnemyConnected += _events.OnEnemyConnected;
+            Provider.onEnemyDisconnected += _events.OnEnemyDisconnected;
 
-            ChatManager.onChatted += events.onPlayerChatted;
+            ChatManager.onChatted += _events.OnPlayerChatted;
             
 
 
@@ -123,12 +123,12 @@ namespace RedstonePlugins.AdminTools
         }
         protected override void Unload()
         {
-            Instance = null;
+            _instance = null;
             /* Unsubscribe Events */
 
-            Provider.onEnemyConnected -= events.OnEnemyConnected;
+            Provider.onEnemyConnected -= _events.OnEnemyConnected;
 
-            Provider.onEnemyDisconnected -= events.OnEnemyDisconnected;
+            Provider.onEnemyDisconnected -= _events.OnEnemyDisconnected;
 
             
         }

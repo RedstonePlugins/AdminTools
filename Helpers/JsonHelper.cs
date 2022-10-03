@@ -17,9 +17,9 @@ namespace RedstonePlugins.AdminTools.Helpers
         }
 
 
-        public static Dictionary<string,string> ReadTranslations(string path)
+        public static void ReadTranslations(string path)
         {
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(path));
+            JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(path));
         }
 
         public static void WriteTranslations(string path, Dictionary<string,string> Translations)

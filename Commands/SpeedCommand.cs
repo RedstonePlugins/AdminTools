@@ -24,21 +24,23 @@ namespace RedstonePlugins.AdminTools.Commands
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
-            UnturnedPlayer player = (UnturnedPlayer)caller;
+            var player = (UnturnedPlayer)caller;
             if (command.Length < 1)
             {
                 TranslationHelper.SendMessageTranslation(player.CSteamID, "ProperUsage", "/Speed <Number>");
                 return;
             }
-            var Value = command[0];
-            if (float.TryParse(Value, out float val))
+            var value = command[0];
+            if (!float.TryParse(value, out float val))
             {
-                player.Player.movement.sendPluginSpeedMultiplier(val);
-                TranslationHelper.SendMessageTranslation(player.CSteamID, "command_gravity_speed_success", "Speed", val.ToString());
+                TranslationHelper.SendMessageTranslation(player.CSteamID, "command_gravity_value_notnumber",
+                    val.ToString());
             }
             else
             {
-                TranslationHelper.SendMessageTranslation(player.CSteamID, "command_gravity_value_notnumber", val.ToString());
+                player.Player.movement.sendPluginSpeedMultiplier(val);
+                TranslationHelper.SendMessageTranslation(player.CSteamID, "command_gravity_speed_success", "Speed",
+                    val.ToString());
             }
         }
     }

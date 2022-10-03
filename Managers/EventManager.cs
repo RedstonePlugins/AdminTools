@@ -17,15 +17,15 @@ namespace RedstonePlugins.AdminTools.Managers
     {
         private static Config Configuration => AdminTools.Configuration;
         private static Dictionary<string, string> Translations => AdminTools.Translations;
-        private Dictionary<CSteamID, DateTime> lastChatted = new Dictionary<CSteamID, DateTime>();
+        private Dictionary<CSteamID, DateTime> _lastChatted = new Dictionary<CSteamID, DateTime>();
 
         public void OnEnemyConnected(SteamPlayer player)
         {
             #region JoinLeave
             if (Configuration.Modules.JoinLeave.ShowMessages)
             {
-                TranslationHelper.SendMessageTranslation(player, "event_player_join_server", PlayerHelper.getPlayerName(player));
-                Logger.Log(string.Format(Translations["event_player_join_server"],PlayerHelper.getPlayerName(player)));
+                TranslationHelper.SendMessageTranslation(player, "event_player_join_server", PlayerHelper.GetPlayerName(player));
+                Logger.Log(string.Format(Translations["event_player_join_server"],PlayerHelper.GetPlayerName(player)));
 
             }
             #endregion
@@ -36,34 +36,34 @@ namespace RedstonePlugins.AdminTools.Managers
             #region JoinLeave
             if(Configuration.Modules.JoinLeave.ShowMessages)
             {
-                TranslationHelper.SendMessageTranslation(player, "event_player_leave_server", PlayerHelper.getPlayerName(player));
-                Logger.Log(string.Format(Translations["event_player_leave_server"], PlayerHelper.getPlayerName(player)));
+                TranslationHelper.SendMessageTranslation(player, "event_player_leave_server",
+                    PlayerHelper.GetPlayerName(player));
+                Logger.Log(string.Format(Translations["event_player_leave_server"], PlayerHelper.GetPlayerName(player)));
 
             }
 
             #endregion
         }
 
-        public void onPlayerChatted(SteamPlayer player, EChatMode mode, ref UnityEngine.Color chatted, ref bool isRich, string text, ref bool isVisible)
+        public void OnPlayerChatted(SteamPlayer player, EChatMode mode, ref UnityEngine.Color chatted, ref bool isRich, string text, ref bool isVisible)
         {
             #region AntiSpam
             var playerID = player.playerID.steamID;
 
-            if (Configuration.Modules.AntiSpam.Enable && !text.StartsWith("/") && !UnturnedPlayer.FromSteamPlayer(player).HasPermission("admintools.antispam.bypass"))
+            if (!Configuration.Modules.AntiSpam.Enable || text.StartsWith("/") || UnturnedPlayer.FromSteamPlayer(player)
+                    .HasPermission("admintools.antispam.bypass")) return;
+            var interval = Configuration.Modules.AntiSpam.Interval;
+
+            if (!_lastChatted.ContainsKey(playerID))
+                _lastChatted.Add(playerID, DateTime.Now);
+
+            if((DateTime.Now - _lastChatted[playerID]).TotalSeconds < interval)
             {
-                var interval = Configuration.Modules.AntiSpam.Interval;
-
-                if (!lastChatted.ContainsKey(playerID))
-                    lastChatted.Add(playerID, DateTime.Now);
-
-                if((DateTime.Now - lastChatted[playerID]).TotalSeconds < interval)
-                {
-                    isVisible = false;
-                    TranslationHelper.SendMessageTranslation(playerID, "event_onplayerchatted_spamlimit_rate");
+                isVisible = false;
+                TranslationHelper.SendMessageTranslation(playerID, "event_onplayerchatted_spamlimit_rate");
                     
-                }
-                lastChatted[playerID] = DateTime.Now;
             }
+            _lastChatted[playerID] = DateTime.Now;
 
             #endregion
         }
